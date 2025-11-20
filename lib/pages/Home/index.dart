@@ -3,6 +3,7 @@ import 'package:campusmall/components/Home/Hot.dart';
 import 'package:campusmall/components/Home/MoreList.dart';
 import 'package:campusmall/components/Home/Slider.dart';
 import 'package:campusmall/components/Home/Suggestion.dart';
+import 'package:campusmall/viewmodels/BannerItem.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -13,10 +14,24 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final List<BannerItem> _bannerList = [
+    BannerItem(
+      id: "1",
+      imageUrl: "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/banner/nuandong_sj.png",
+    ),
+    BannerItem(
+      id: "2",
+      imageUrl: "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/banner/nvshen_sj.png",
+    ),
+    BannerItem(
+      id: "3",
+      imageUrl: "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/banner/xinnian_sj.png",
+    ),
+  ];
   List<Widget> _getSlivers() {
     return [
 
-      SliverToBoxAdapter(child: Sliders()),
+      SliverToBoxAdapter(child: Sliders(bannerList: _bannerList)),
 
       SliverToBoxAdapter(child: SizedBox(height: 20)),
 
