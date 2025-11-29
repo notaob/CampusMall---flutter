@@ -61,7 +61,7 @@ class _SliderState extends State<Sliders> {
       carouselController: _pageController, // 使用CarouselController控制轮播图
       items: List.generate(
         widget.bannerList.length,
-        (index) => Image.network(widget.bannerList[index].imageUrl,
+        (index) => Image.network(widget.bannerList[index].imgUrl,
         fit: BoxFit.cover,
         width: screenWidth,
         ),
