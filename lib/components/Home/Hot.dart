@@ -97,7 +97,7 @@ List<Column> _buildHotView() {
                 Text(
                   hotItems[index].price,
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 12,
                     color: Colors.redAccent.shade700,
                     fontWeight: FontWeight.bold,
                   ),

@@ -39,7 +39,7 @@ class _HmMoreListState extends State<MoreList> {
               widget.recommendList[index].name,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.black, fontSize: 20),
+              style: TextStyle(color: Colors.black, fontSize: 14),
             ),
           ),
           SizedBox(height: 6),
