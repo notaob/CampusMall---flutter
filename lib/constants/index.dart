@@ -4,6 +4,7 @@ class GlobalConstants {
   static const int DEFAULT_TIMEOUT = 5000;//默认超时时间
   static const String SUCCESS_CODE = "1";//成功状态码
   static const String FAIL_CODE = "0";//失败状态码
+  static const String TOKEN_KEY = "hm_shop_token";//token键名
 }
 
 //存放请求地址接口常量
@@ -14,4 +15,7 @@ class HTTPConstants {
   static const String INVOGUE_LIST = "/hot/inVogue";//爆款推荐
   static const String ONESTOP_LIST = "/hot/oneStop";//一站买全
   static const String RECOMMEND_LIST = "/home/recommend";//商品列表
+  static const String Guess_LIST = "/home/goods/guessLike";//猜你喜欢
+  static const String LOGIN = "/login";//登录
+  static const String USER_PROFILE = "/member/profile";//用户信息
 }

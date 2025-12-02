@@ -1,5 +1,6 @@
 //基于Dio进行二次封装
 import 'package:campusmall/constants/index.dart';
+import 'package:campusmall/stores/TokenManager.dart';
 import 'package:dio/dio.dart';
 
 class DioRequest {
@@ -18,6 +19,13 @@ class DioRequest {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (request, handler) {
+          //添加token
+          final token = tokenManager.getToken();
+          if (token.isNotEmpty) {
+            request.headers = {
+              'Authorization': 'Bearer ${token}',
+            };
+          }
           //在发送请求之前做一些事情
           return handler.next(request); //继续发送请求
         },
@@ -31,8 +39,12 @@ class DioRequest {
           handler.reject(DioException(requestOptions: response.requestOptions));
         },
         onError: (e, handler) {
-          //在发生错误时做一些事情
-          return handler.next(e); //继续处理错误
+          handler.reject(
+            DioException(
+              requestOptions: e.requestOptions,
+              message: e.response?.data?['msg'] ?? '请求失败',
+            ),
+          );
         },
       ),
     );
@@ -43,6 +55,11 @@ class DioRequest {
     return _handleResponse(_dio.get(url, queryParameters: params));
   }
 
+  //post请求
+  Future<dynamic> post(String url, {Map<String, dynamic>? data}) {
+    return _handleResponse(_dio.post(url, data: data));
+  }
+
   //进一步处理返回结果函数
   Future<dynamic> _handleResponse(Future<Response<dynamic>> task) async {
     try {
@@ -51,9 +68,12 @@ class DioRequest {
       if (data['code'] == GlobalConstants.SUCCESS_CODE) {
         return data['result'];
       }
-      throw Exception(data['msg'] ?? '请求失败');
+      throw DioException(
+        requestOptions: res.requestOptions,
+        message: data['msg'] ?? '请求失败',
+      );
     } catch (e) {
-      throw Exception(e);
+      rethrow;
     }
   }
 }
